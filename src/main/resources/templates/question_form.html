@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<form th:action="@{/questionCreate}" method="post">
+		제목 : <input type="text" name="subject"><br>
+		내용 : <textarea rows="" cols="" name="content"></textarea><br>
+		<input type="submit" value="저장하기">
+	</form>
+</body>
+</html>

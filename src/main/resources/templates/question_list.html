@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>질문-답변 게시판</title>
+</head>
+<body>
+	<table>
+		<tr>
+			<th>제목</th>
+			<th>작성일시</th>
+		</tr>		
+		<tr th:each="question:${questionList}">
+			<td ><a th:href="@{|/questionContentView/${question.id}|}" th:text="${question.subject}"></a></td>
+			<td th:text="${question.createDate}"></td>
+		</tr>
+			
+	</table>
+</body>
+</html>
