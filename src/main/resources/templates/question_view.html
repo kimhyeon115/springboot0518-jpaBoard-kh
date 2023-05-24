@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+<title>질문 상세보기</title>
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg bg-light">
+	  <div class="container-fluid">
+	    <a class="navbar-brand" href="#">RLAGUS Q/A/ BOARD</a>
+	    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+	      <span class="navbar-toggler-icon"></span>
+	    </button>
+	    <div class="collapse navbar-collapse" id="navbarNav">
+	      <ul class="navbar-nav">
+	        <li class="nav-item">
+	          <a class="nav-link active" aria-current="page" href="/">글목록</a>
+	        </li>
+	        <li class="nav-item">
+	          <a class="nav-link" href="/questionCreate">질문하기</a>
+	        </li>
+	        <li class="nav-item">
+	          <a class="nav-link" href="#">로그인</a>
+	        </li>
+	        <li class="nav-item">
+	          <a class="nav-link" href="/memberJoin">회원가입</a>
+	        </li>
+	      </ul>
+	    </div>
+	  </div>
+	</nav>
+	<div class="container my-3">
+		<!-- 질문 관련 시작 -->
+		<h2 class="border-bottom py-2" th:text="${question.subject}"></h2>
+		<div class="card my-3">
+			<div class="card-body">
+				<div class="card-text" style="white-space:pre-line;" th:text="${question.content}"></div>
+				<div class="d-flex justify-content-end">
+					<div class="badge text-bg-secondary p-2 text-start">
+						<div th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 질문 관련 끝 -->
+		
+		<!-- 답변 리스트 시작 -->
+		<h5 class="border-bottom my-3 py-2" th:text="|${#lists.size(question.answerList)}개의 답변이 있습니다.|"></h5>
+		<div class="card my-3" th:each="answer:${question.answerList}">
+			<div class="card-body">			
+				<div class="card-text" style="white-space:pre-line" th:text="${answer.content}"></div>
+				<div class="d-flex justify-content-end">
+					<div class="badge text-bg-secondary p-2 text-start">
+						<div th:text="${#temporals.format(answer.createDate, 'yyyy-MM-dd HH:mm')}"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 답변 리스트 끝 -->
+		
+		<!-- 답변 등록 시작 -->
+		<form th:action="@{|/answerCreate/${question.id}|}" method="post" class="my-3" th:object="${answerForm}">
+			<!-- 답변 유효성 체크 시작 -->
+			<div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}" role="alert">
+				<div th:each="err:${#fields.allErrors()}" th:text="${err}"></div>
+			</div>			
+			<!-- 답변 유효성 체크 끝 -->
+			<textarea id="content" class="form-control" rows="6" th:field="*{content}"></textarea>
+			<input class="btn btn-primary my-3" type="submit" value="답변등록">
+		</form>
+		<!-- 답변 등록 끝 -->
+	</div>
+</body>
+</html>

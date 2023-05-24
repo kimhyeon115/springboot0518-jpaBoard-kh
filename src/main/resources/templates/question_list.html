@@ -2,19 +2,53 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
 <title>질문-답변 게시판</title>
 </head>
 <body>
-	<table>
-		<tr>
-			<th>제목</th>
-			<th>작성일시</th>
-		</tr>		
-		<tr th:each="question:${questionList}">
-			<td ><a th:href="@{|/questionContentView/${question.id}|}" th:text="${question.subject}"></a></td>
-			<td th:text="${question.createDate}"></td>
-		</tr>
-			
-	</table>
+	<nav class="navbar navbar-expand-lg bg-light">
+	  <div class="container-fluid">
+	    <a class="navbar-brand" href="#">RLAGUS Q/A/ BOARD</a>
+	    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+	      <span class="navbar-toggler-icon"></span>
+	    </button>
+	    <div class="collapse navbar-collapse" id="navbarNav">
+	      <ul class="navbar-nav">
+	        <li class="nav-item">
+	          <a class="nav-link active" aria-current="page" href="/">글목록</a>
+	        </li>
+	        <li class="nav-item">
+	          <a class="nav-link" href="questionCreate">질문하기</a>
+	        </li>
+	        <li class="nav-item">
+	          <a class="nav-link" href="#">로그인</a>
+	        </li>
+	        <li class="nav-item">
+	          <a class="nav-link" href="memberJoin">회원가입</a>
+	        </li>
+	      </ul>
+	    </div>
+	  </div>
+	</nav>
+	<div class="container my-3">
+		<table class="table">
+			<thead class="table-primary">
+				<tr>
+					<th>번호</th>
+					<th>제목</th>
+					<th>작성일시</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="question:${questionList}">
+					<td th:text="${question.id}"></td>
+					<td ><a th:href="@{|/questionContentView/${question.id}|}" th:text="${question.subject}"></a></td>
+					<td th:text="${#temporals.format(question.createDate,'yyyy-MM-dd HH:mm')}"></td>
+				</tr>
+			</tbody>
+		</table>
+		<a th:href="@{/questionCreate}" class="btn btn-primary my-3">질문 등록</a>
+		
+	</div>
 </body>
 </html>

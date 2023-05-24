@@ -3,9 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
-<title>질문 등록</title>
+<title>회원 가입</title>
 </head>
 <body>
+	<!-- 네비게이션 바 시작 -->
 	<nav class="navbar navbar-expand-lg bg-light">
 	  <div class="container-fluid">
 	    <a class="navbar-brand" href="#">RLAGUS Q/A/ BOARD</a>
@@ -30,23 +31,36 @@
 	    </div>
 	  </div>
 	</nav>
-	<div class="container">
-		<h5 class="my-3 border-bottom pb-2">질문 등록하기</h5>
-		<form th:action="@{/questionCreate}" method="post" th:object="${questionForm}">
-			<!-- 질문 등록시 에러 발생 메세지 출력 -->
+	<!-- 네비게이션 바 끝 -->
+	<div class="container my-3">
+		<div class="my-3 border-bottom">
+			<div>
+				<h4>회원 가입</h4>
+			</div>
+		</div>
+		<form th:action="@{/memberJoin}" method="post" th:object="${memberForm}">
+			<!-- 회원 등록시 에러 발생 메세지 출력 -->
  			<div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}" role="alert">
 				<div th:each="err:${#fields.allErrors()}" th:text="${err}"></div>
 			</div>
 			<!-- 에러 발생 출력 끝 -->
 			<div class="mb-3">
-				<label class="form-label" for="subject">제목</label>
-				<input type="text" th:field="*{subject}" id="subject" class="form-control"><br>
+				<label for="userid" class="form-label">사용자 아이디 :</label>
+				<input class="form-control" type="text" th:field="*{userid}">
 			</div>
 			<div class="mb-3">
-				<label class="form-label" for="subject">내용</label>
-				<textarea id="content" class="form-control" rows="6" th:field="*{content}"></textarea><br>
-				<input type="submit" value="저장하기" class="btn btn-primary my-2">
+				<label for="userpw1" class="form-label">사용자 비밀번호 :</label>
+				<input class="form-control" type="password" th:field="*{userpw1}">
 			</div>
+			<div class="mb-3">
+				<label for="userpw2" class="form-label">사용자 비번확인:</label>
+				<input class="form-control" type="password" th:field="*{userpw2}">
+			</div>
+			<div class="mb-3">
+				<label for="email" class="form-label">사용자 이메일 :</label>
+				<input class="form-control" type="text" th:field="*{email}">
+			</div>
+			<input class="btn btn-primary" type="submit" value="회원가입">
 		</form>
 	</div>
 </body>
