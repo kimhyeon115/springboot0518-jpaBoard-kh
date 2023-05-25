@@ -2,8 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
-<title>회원 가입</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"> 
+<title>회원 로그인</title>
 </head>
 <body>
 	<!-- 네비게이션 바 시작 -->
@@ -19,7 +19,7 @@
 	          <a class="nav-link" th:href="@{/questionCreate}">질문하기</a>
 	        </li>
 	        <li class="nav-item">
-	          <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/login}">로그인</a>
+	        	<a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/login}">로그인</a>
 	          <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/logout}">로그아웃</a>
 	        </li> 
 	        <li class="nav-item">
@@ -30,37 +30,33 @@
 	  </div>
 	</nav>
 	<!-- 네비게이션 바 끝 -->
+	
 	<div class="container my-3">
 		<div class="my-3 border-bottom">
 			<div>
-				<h4>회원 가입</h4>
+				<h4>회원 로그인</h4>
 			</div>
 		</div>
-		<form th:action="@{/memberJoin}" method="post" th:object="${memberForm}">
-			<!-- 회원 등록시 에러 발생 메세지 출력 -->
-			<div class="alert alert-danger" role="alert" th:if="${#fields.hasAnyErrors()}">				
-				<div th:each="err:${#fields.allErrors()}" th:text="${err}"></div>
+		<form th:action="@{/login}" method="post">
+			<!-- 회원 로그인시 에러 발생 메세지 출력 -->
+			<div th:if="${param.error}">			
+				<div class="alert alert-danger">				
+					로그인 실패! 사용자 아이디 또는 비밀번호를 다시 확인해 주세요.
+				</div>
 			</div>			
 			<!-- 에러 발생 출력 끝 -->
 			
 			<div class="mb-3">
-				<label for="userid" class="form-label">사용자 아이디 :</label>
-				 <input class="form-control" type="text" th:field="*{username}">
+				<label for="username" class="form-label">아이디 :</label>
+				 <input class="form-control" type="text" name="username" id="username">
 			</div>
 			<div class="mb-3">
-				<label for="userpw1" class="form-label">사용자 비밀번호 :</label>
-				<input class="form-control" type="password" th:field="*{userpw1}">
-			</div>
-			<div class="mb-3">
-				<label for="userpw2" class="form-label">사용자 비밀번호 확인 :</label>
-				<input class="form-control" type="password" th:field="*{userpw2}">
-			</div>
-			<div class="mb-3">
-				<label for="email" class="form-label">사용자 이메일 :</label>
-				<input class="form-control" type="text" th:field="*{email}">
-			</div>
-			<input class="btn btn-primary" type="submit" value="회원가입">		
+				<label for="userpw" class="form-label">비밀번호 :</label>
+				<input class="form-control" type="password" name="userpw" id="userpw">
+			</div>			
+			<input class="btn btn-primary" type="submit" value="로그인">		
 		</form>
 	</div>
+	
 </body>
 </html>

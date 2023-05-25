@@ -10,7 +10,7 @@ public class MemberForm {
 
 	@NotEmpty(message = "아이디는 필수 입력사항 입니다.")
 	@Size(min = 4, message = "아이디는 4자 이상이어야 합니다.")
-	private String userid;
+	private String username;
 	
 	@NotEmpty(message = "비밀번호는 필수 입력사항 입니다.")
 	@Size(min = 4, message = "비밀번호는 4자 이상이어야 합니다.")

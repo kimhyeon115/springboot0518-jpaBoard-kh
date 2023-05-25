@@ -54,6 +54,6 @@ public class Question {
 	
 	@ManyToMany
 	// 다 대 다 관계가 되면 question_liker 이름의 테이블 자동으로 생성됨
-	private Set<SiteMember> liker;		// 좋아요 를 클릭한 사람들의 아이디
+	private Set<SiteMember> liker;		// 좋아요 를 클릭한 사람들의 아이디 sitemember 객체들
 	// 중복 방지를 위해 List(컬렉션)가 아닌 Set(컬렉션)으로 자료구조 설정(좋아요는 한 질문에 아이디 당 한번만 가능)
 }
